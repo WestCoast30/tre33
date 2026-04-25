@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCS EL AB — Elektriska lösningar för industrin</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1a3a5c;
+            --navy-deep: #0f2540;
+            --blue: #2980b9;
+            --blue-light: #4aa3df;
+            --blue-pale: #e8f4fb;
+            --blue-ghost: #f4f9fd;
+            --white: #ffffff;
+            --gray-50: #f8fafb;
+            --gray-100: #eef2f5;
+            --gray-300: #c4cdd5;
+            --gray-500: #6b7c8a;
+            --gray-700: #3a4a56;
+            --text: #1a2a36;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--gray-100);
+            transition: box-shadow 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .nav-logo {
+            height: 44px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-700);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        .nav-links a:hover {
+            color: var(--blue);
+        }
+
+        .nav-links .btn-nav {
+            background: var(--navy);
+            color: var(--white);
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .nav-links .btn-nav:hover {
+            background: var(--blue);
+            color: var(--white);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--navy);
+            margin: 6px 0;
+            transition: all 0.3s;
+        }
+
+        /* HERO */
+        .hero {
+            padding: 10rem 2rem 6rem;
+            background: linear-gradient(165deg, var(--navy-deep) 0%, var(--navy) 40%, var(--blue) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(74,163,223,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to top, var(--white), transparent);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--blue-light);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.2s forwards;
+        }
+
+        .hero h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.15;
+            max-width: 700px;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.4s forwards;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.75);
+            max-width: 520px;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.6s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.8s forwards;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 0.85rem 2rem;
+            background: var(--white);
+            color: var(--navy);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.25s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            padding: 0.85rem 2rem;
+            background: transparent;
+            color: var(--white);
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            border-radius: 6px;
+            transition: all 0.25s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--white);
+            background: rgba(255,255,255,0.08);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 700;
+            color: var(--navy-deep);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--gray-500);
+            max-width: 560px;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+        }
+
+        /* SERVICES */
+        .services {
+            background: var(--gray-50);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: 10px;
+            padding: 2.2rem 1.8rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--blue);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--blue-light);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(26,58,92,0.08);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--blue-pale);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            font-size: 1.4rem;
+        }
+
+        .service-card h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.6rem;
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* ABOUT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--gray-700);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .stat-box {
+            background: var(--blue-ghost);
+            border-radius: 10px;
+            padding: 1.8rem;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-box .label {
+            font-size: 0.82rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        /* CONTACT */
+        .contact {
+            background: var(--navy-deep);
+            color: var(--white);
+        }
+
+        .contact .section-label {
+            color: var(--blue-light);
+        }
+
+        .contact .section-title {
+            color: var(--white);
+        }
+
+        .contact .section-subtitle {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .contact-item-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(74,163,223,0.15);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--blue-light);
+            font-size: 1.1rem;
+        }
+
+        .contact-item-text h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-item-text p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            background: rgba(255,255,255,0.06);
+            border: 1.5px solid rgba(255,255,255,0.12);
+            border-radius: 6px;
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255,255,255,0.35);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--blue-light);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .btn-submit {
+            padding: 0.9rem 2rem;
+            background: var(--blue);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            align-self: flex-start;
+        }
+
+        .btn-submit:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--navy-deep);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.35);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1.5rem 2rem;
+                border-bottom: 1px solid var(--gray-100);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 8rem 1.5rem 5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <img src="https://i.imgur.com/placeholder.png" alt="OCS EL" class="nav-logo" onerror="this.outerHTML='<span style=\'font-family:Plus Jakarta Sans,sans-serif;font-weight:800;font-size:1.4rem;color:#1a3a5c\'>OCS EL</span>'">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#tjanster">Tjänster</a></li>
+                <li><a href="#om-oss">Om oss</a></li>
+                <li><a href="#kontakt" class="btn-nav">Kontakt</a></li>
+            </ul>
+            <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Meny">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-inner">
+            <span class="hero-tag">OCS EL AB — Eltjänster för industrin</span>
+            <h1>Elkompetens när industrin behöver den</h1>
+            <p>Vi rycker in med elinstallationer, montage, automation och service — när ni behöver det, där ni behöver det. Flexibelt, kvalitetssäkrat och utan långa bindningstider.</p>
+            <div class="hero-buttons">
+                <a href="#kontakt" class="btn-primary">Kontakta oss</a>
+                <a href="#tjanster" class="btn-secondary">Våra tjänster</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="tjanster">
+        <div class="section-inner">
+            <span class="section-label reveal">Våra tjänster</span>
+            <h2 class="section-title reveal">Det vi gör — när ni behöver det</h2>
+            <p class="section-subtitle reveal">Vi ställer upp med rätt elkompetens för ert projekt, oavsett storlek. Ingen byråkrati, bara leverans.</p>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">⚡</div>
+                    <h3>Elinstallation</h3>
+                    <p>Professionella elinstallationer för industriella anläggningar. Vi kommer in, gör jobbet och säkerställer att allt uppfyller gällande normer.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">🔧</div>
+                    <h3>Elmontage</h3>
+                    <p>Komplett elmontage för maskiner, produktionslinjer och industriella system. Från ritning till färdig installation.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Automationslösningar</h3>
+                    <p>Moderna automationslösningar som effektiviserar produktion och ökar driftsäkerhet. PLC-programmering och styrsystem.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">🛠️</div>
+                    <h3>Servicearbeten</h3>
+                    <p>Felsökning, underhåll och akuta insatser. Vi minimerar stillestånd så att ni kan fokusera på er kärnverksamhet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="om-oss">
+        <div class="section-inner">
+            <div class="about-grid">
+                <div class="about-text">
+                    <span class="section-label reveal">Om OCS EL</span>
+                    <h2 class="section-title reveal">Flexibel elkompetens — utan omvägar</h2>
+                    <p class="reveal">OCS EL AB är ett svenskt bolag som levererar eltjänster till industrier med höga krav. Vi fungerar som en förlängning av ert team — ni ringer, vi kommer.</p>
+                    <p class="reveal">Våra uppdragsgivare finns inom marin, försvar och tung industri. Vi är vana vid krävande miljöer där det inte finns utrymme för kompromisser på kvalitet eller säkerhet.</p>
+                </div>
+                <div class="about-stats reveal">
+                    <div class="stat-box">
+                        <div class="number">B2B</div>
+                        <div class="label">Fokus</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">100%</div>
+                        <div class="label">Kundnöjdhet</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">⚡</div>
+                        <div class="label">Snabb leverans</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">SE</div>
+                        <div class="label">Svenskt bolag</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="kontakt">
+        <div class="section-inner">
+            <span class="section-label reveal">Kontakt</span>
+            <h2 class="section-title reveal">Hör av dig</h2>
+            <p class="section-subtitle reveal">Beskriv vad ni behöver hjälp med så återkommer vi — snabbt och utan krångel.</p>
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <div class="contact-item">
+                        <div class="contact-item-icon">✉</div>
+                        <div class="contact-item-text">
+                            <h4>E-post</h4>
+                            <p>info@ocsel.se</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">☎</div>
+                        <div class="contact-item-text">
+                            <h4>Telefon</h4>
+                            <p>+46 XX-XXX XX XX</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">📍</div>
+                        <div class="contact-item-text">
+                            <h4>Plats</h4>
+                            <p>Göteborg, Sverige</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form reveal" name="contact" method="POST" data-netlify="true">
+                    <div class="form-row">
+                        <input type="text" name="name" placeholder="Namn" required>
+                        <input type="email" name="email" placeholder="E-post" required>
+                    </div>
+                    <input type="text" name="company" placeholder="Företag">
+                    <input type="text" name="subject" placeholder="Ämne">
+                    <textarea name="message" placeholder="Meddelande" required></textarea>
+                    <button type="submit" class="btn-submit">Skicka meddelande</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 OCS EL AB. Alla rättigheter förbehållna.</p>
+    </footer>
+
+    <script>
+        // Nav scroll effect
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+        // Reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
