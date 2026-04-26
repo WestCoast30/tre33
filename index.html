@@ -1089,7 +1089,7 @@
                         <div class="contact-item-icon">☎</div>
                         <div class="contact-item-text">
                             <h4>Telefon</h4>
-                            <p>TBD</p>
+                            <p>Skriv ert telefonnummer i kontaktformuläret så ringer vi upp</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -1114,7 +1114,8 @@
                         </div>
                     </div>
                 </div>
-                <form class="contact-form reveal" name="contact" method="POST" data-netlify="true">
+                <form class="contact-form reveal" name="contact" method="POST" data-netlify="true" id="contactForm">
+                    <input type="hidden" name="form-name" value="contact">
                     <div class="form-row">
                         <input type="text" name="name" placeholder="Namn" required>
                         <input type="email" name="email" placeholder="E-post" required>
@@ -1201,6 +1202,22 @@
                 document.getElementById('cookieBanner').classList.add('show');
             }
         })();
+        
+    // Form submit handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var form = this;
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(form)).toString()
+            }).then(function() {
+                alert('Tack för ditt meddelande! Vi återkommer så snart vi kan.');
+                form.reset();
+            }).catch(function() {
+                alert('Något gick fel. Försök igen eller mejla oss på Oskar@ocsel.se.');
+            });
+        });
     </script>
 
 </body>
