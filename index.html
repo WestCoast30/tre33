@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OCS EL AB - Eltjänster till industrin</title>
+    <meta name="google-site-verification" content="6aZBBZaHYwikXgXDDii7YaCFupArhLHXqqj1vMK11V0"/>
     <style>
         /* FONTS — self-hosted for GDPR compliance */
         @font-face {
@@ -1271,12 +1272,10 @@
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams(new FormData(form)).toString() + '&form-name=contact'
             }).then(function() {
-                alert('Tack för ditt meddelande! Vi återkommer så snart vi kan.');
-                form.reset();
+                form.innerHTML = '<div style="text-align:center;padding:2rem 0;"><p style="font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:0.5rem;">✉️ Tack för ditt meddelande!</p><p style="color:rgba(255,255,255,0.6);">Vi återkommer så snart vi kan.</p></div>';
             }).catch(function() {
-                alert('Något gick fel. Försök igen eller mejla oss på Oskar@ocsel.se.');
+                form.innerHTML = '<div style="text-align:center;padding:2rem 0;"><p style="font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:0.5rem;">Något gick fel</p><p style="color:rgba(255,255,255,0.6);">Försök igen eller mejla oss på Oskar@ocsel.se</p></div>';
             });
-        });
     </script>
 
 </body>
