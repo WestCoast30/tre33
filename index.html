@@ -4,8 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OCS EL AB — Elektriska lösningar för industrin</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* FONTS — self-hosted for GDPR compliance */
+        @font-face {
+            font-family: 'Outfit';
+            src: url('fonts/Outfit-VariableFont_wght.woff2') format('woff2-variations');
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+        font-family: 'Inter';
+        src: url('fonts/Inter/Inter-VariableFont_opsz,wght.woff2') format('woff2-variations');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+        }
         :root {
             --navy: #1a3a5c;
             --navy-deep: #0f2540;
@@ -33,7 +47,7 @@
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             color: var(--text);
             background: var(--white);
             line-height: 1.6;
@@ -63,20 +77,43 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 72px;
+            height: 150px;
+            transition: height 0.3s ease;
+        }
+        nav.scrolled .nav-inner {
+        height: 52px;
         }
 
         .nav-logo {
-            height: 44px;
+            height: 120px;
+         transition: height 0.3s ease;
         }
 
+        nav.scrolled .nav-logo {
+         height: 38px;
+        }
+        nav.scrolled .nav-tagline {
+        font-size: 1.1rem;
+        }
         .nav-links {
             display: flex;
             gap: 2rem;
             list-style: none;
             align-items: center;
         }
-
+        .nav-tagline {
+        font-family: 'Inter', sans-serif;
+        font-size: 2rem;
+        font-weight: 900;
+        color:#02436D;
+        letter-spacing: 0.02em;
+        margin-left: 3rem;
+        margin-right: auto;
+        transition: font-size 0.3s ease;
+        }
+        .nav-brand {
+        font-family: 'Inter', sans-serif;
+        }
         .nav-links a {
             text-decoration: none;
             color: var(--gray-700);
@@ -122,7 +159,7 @@
 
         /* HERO */
         .hero {
-            padding: 10rem 2rem 6rem;
+            padding: 11rem 4rem 8.6rem;
             background: linear-gradient(165deg, var(--navy-deep) 0%, var(--navy) 40%, var(--blue) 100%);
             position: relative;
             overflow: hidden;
@@ -146,7 +183,7 @@
             left: 0;
             right: 0;
             height: 120px;
-            background: linear-gradient(to top, var(--white), transparent);
+            background: linear-gradient(to top, #d6ecf8, transparent);
             pointer-events: none;
         }
 
@@ -155,6 +192,42 @@
             margin: 0 auto;
             position: relative;
             z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+        }
+        .hero-content {
+        flex: 1;
+        }
+
+        .hero-instagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            opacity: 0;
+            animation: fadeUp 0.8s 1s forwards;
+        }
+
+        .hero-instagram:hover {
+            transform: translateY(-4px);
+        }
+
+        .hero-instagram img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .hero-instagram span {
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+            font-weight: 500;
         }
 
         .hero-tag {
@@ -170,21 +243,29 @@
         }
 
         .hero h1 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Outfit', sans-serif;
             font-size: clamp(2.4rem, 5vw, 3.8rem);
             font-weight: 800;
             color: var(--white);
             line-height: 1.15;
             max-width: 700px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.7rem;
             opacity: 0;
             animation: fadeUp 0.8s 0.4s forwards;
+        }
+        .hero-subtitle {
+         font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--white);
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeUp 0.8s 0.4s forwards;
         }
 
         .hero p {
             font-size: 1.15rem;
             color: rgba(255,255,255,0.75);
-            max-width: 520px;
+            max-width: 600px;
             line-height: 1.7;
             margin-bottom: 2.5rem;
             opacity: 0;
@@ -245,21 +326,22 @@
         }
 
         .section-label {
-            font-size: 0.75rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            letter-spacing: 0.14em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--blue);
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
 
         .section-title {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Outfit', sans-serif;
             font-size: clamp(1.8rem, 3.5vw, 2.6rem);
             font-weight: 700;
             color: var(--navy-deep);
+            margin-top: 1.2rem;
             margin-bottom: 1rem;
-            line-height: 1.2;
+            line-height: 1;
         }
 
         .section-subtitle {
@@ -267,12 +349,12 @@
             color: var(--gray-500);
             max-width: 560px;
             line-height: 1.7;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         /* SERVICES */
         .services {
-            background: var(--gray-50);
+            background: #d6ecf8;
         }
 
         .services-grid {
@@ -326,7 +408,7 @@
         }
 
         .service-card h3 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Outfit', sans-serif;
             font-size: 1.15rem;
             font-weight: 700;
             color: var(--navy);
@@ -355,8 +437,9 @@
 
         .about-stats {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
+            grid-column: 1 / -1;
         }
 
         .stat-box {
@@ -367,7 +450,7 @@
         }
 
         .stat-box .number {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Outfit', sans-serif;
             font-size: 2.2rem;
             font-weight: 800;
             color: var(--navy);
@@ -379,6 +462,102 @@
             font-size: 0.82rem;
             color: var(--gray-500);
             font-weight: 500;
+        }
+
+        /* CERTIFICATIONS */
+        .certifications {
+            background: #d6ecf8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certifications::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 60%;
+            height: 180%;
+            background: radial-gradient(ellipse, rgba(41,128,185,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-card {
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: 10px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--blue);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .cert-card:hover {
+            border-color: var(--blue-light);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(26,58,92,0.08);
+        }
+
+        .cert-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .cert-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cert-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .cert-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.4rem;
+            line-height: 1.3;
+        }
+
+        .cert-card p {
+            font-size: 0.82rem;
+            color: var(--gray-500);
+            line-height: 1.5;
+        }
+
+        .cert-card .cert-issuer {
+            font-size: 0.75rem;
+            color: var(--blue);
+            font-weight: 500;
+            margin-top: 0.6rem;
+            letter-spacing: 0.02em;
         }
 
         /* CONTACT */
@@ -462,7 +641,7 @@
             border: 1.5px solid rgba(255,255,255,0.12);
             border-radius: 6px;
             color: var(--white);
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Outfit', sans-serif;
             font-size: 0.9rem;
             transition: border-color 0.2s;
             outline: none;
@@ -483,13 +662,33 @@
             min-height: 130px;
         }
 
+        .contact-form .form-consent {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.5;
+        }
+
+        .contact-form .form-consent input[type="checkbox"] {
+            width: auto;
+            margin-top: 0.2rem;
+            accent-color: var(--blue-light);
+        }
+
+        .contact-form .form-consent a {
+            color: var(--blue-light);
+            text-decoration: underline;
+        }
+
         .btn-submit {
             padding: 0.9rem 2rem;
             background: var(--blue);
             color: var(--white);
             border: none;
             border-radius: 6px;
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Outfit', sans-serif;
             font-weight: 600;
             font-size: 0.95rem;
             cursor: pointer;
@@ -500,6 +699,84 @@
         .btn-submit:hover {
             background: var(--blue-light);
             transform: translateY(-2px);
+        }
+
+        /* COOKIE BANNER */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--navy-deep);
+            color: var(--white);
+            padding: 1.2rem 2rem;
+            z-index: 200;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: none;
+        }
+
+        .cookie-banner.show {
+            display: block;
+        }
+
+        .cookie-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cookie-inner p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.5;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .cookie-inner a {
+            color: var(--blue-light);
+            text-decoration: underline;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .cookie-btn {
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .cookie-accept {
+            background: var(--blue);
+            color: var(--white);
+        }
+
+        .cookie-accept:hover {
+            background: var(--blue-light);
+        }
+
+        .cookie-decline {
+            background: transparent;
+            color: rgba(255,255,255,0.6);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cookie-decline:hover {
+            border-color: rgba(255,255,255,0.4);
+            color: var(--white);
         }
 
         /* FOOTER */
@@ -513,6 +790,16 @@
         footer p {
             font-size: 0.82rem;
             color: rgba(255,255,255,0.35);
+        }
+
+        footer a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--blue-light);
         }
 
         /* ANIMATIONS */
@@ -560,14 +847,23 @@
             .mobile-toggle {
                 display: block;
             }
-
-            .hero {
-                padding: 8rem 1.5rem 5rem;
+            .nav-tagline {
+            display: none;
             }
 
+            .hero {
+                padding: 7rem 2rem 6rem;
+            }
+            .hero-instagram {
+             display: none;
+            }
             .about-grid {
                 grid-template-columns: 1fr;
                 gap: 2.5rem;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .contact-grid {
@@ -575,6 +871,26 @@
             }
 
             .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .cert-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .cookie-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+            .cookie-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cert-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -585,11 +901,13 @@
     <!-- NAV -->
     <nav id="navbar">
         <div class="nav-inner">
-            <img src="https://i.imgur.com/placeholder.png" alt="OCS EL" class="nav-logo" onerror="this.outerHTML='<span style=\'font-family:Plus Jakarta Sans,sans-serif;font-weight:800;font-size:1.4rem;color:#1a3a5c\'>OCS EL</span>'">
+            <img src="logotype/Logotype1.png" alt="OCS EL" class="nav-logo">
+            <span class="nav-tagline"><span class="nav-brand">OCS EL AB</span> </span>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#tjanster">Tjänster</a></li>
                 <li><a href="#om-oss">Om oss</a></li>
-                <li><a href="#kontakt" class="btn-nav">Kontakt</a></li>
+                <li><a href="#certifikat">Certifieringar</a></li>
+                <li><a href="https://www.instagram.com/ocsel_ab" target="_blank" rel="noopener noreferrer">Instagram 🔗</a></li>                <li><a href="#kontakt" class="btn-nav">Kontakt</a></li>
             </ul>
             <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Meny">
                 <span></span><span></span><span></span>
@@ -599,15 +917,21 @@
 
     <!-- HERO -->
     <section class="hero">
-        <div class="hero-inner">
-            <span class="hero-tag">OCS EL AB — Eltjänster för industrin</span>
-            <h1>Elkompetens när industrin behöver den</h1>
-            <p>Vi rycker in med elinstallationer, montage, automation och service — när ni behöver det, där ni behöver det. Flexibelt, kvalitetssäkrat och utan långa bindningstider.</p>
+    <div class="hero-inner">
+        <div class="hero-content">
+            <h1>Elkompetens</h1>
+            <h2 class="hero-subtitle">— när ni behöver det, där ni behöver det.</h2>
+            <p>Vi ställer upp med elkompetens för era projekt, oavsett om det gäller montage på plats, service i fält eller tillfällig förstärkning.</p>
             <div class="hero-buttons">
                 <a href="#kontakt" class="btn-primary">Kontakta oss</a>
                 <a href="#tjanster" class="btn-secondary">Våra tjänster</a>
             </div>
         </div>
+        <a href="https://www.instagram.com/ocsel_ab" target="_blank" rel="noopener noreferrer" class="hero-instagram">
+            <img src="images/instabild1.jpeg" alt="OCSEL_AB på Instagram">
+            <span>Följ oss på Instagram →</span>
+        </a>
+    </div>
     </section>
 
     <!-- SERVICES -->
@@ -615,27 +939,22 @@
         <div class="section-inner">
             <span class="section-label reveal">Våra tjänster</span>
             <h2 class="section-title reveal">Det vi gör — när ni behöver det</h2>
-            <p class="section-subtitle reveal">Vi ställer upp med rätt elkompetens för ert projekt, oavsett storlek. Ingen byråkrati, bara leverans.</p>
+            <p class="section-subtitle reveal">Vi hjälper såväl stora som små bolag med olika kompetenser.</p>
             <div class="services-grid">
                 <div class="service-card reveal">
                     <div class="service-icon">⚡</div>
-                    <h3>Elinstallation</h3>
-                    <p>Professionella elinstallationer för industriella anläggningar. Vi kommer in, gör jobbet och säkerställer att allt uppfyller gällande normer.</p>
-                </div>
-                <div class="service-card reveal">
-                    <div class="service-icon">🔧</div>
                     <h3>Elmontage</h3>
-                    <p>Komplett elmontage för maskiner, produktionslinjer och industriella system. Från ritning till färdig installation.</p>
+                    <p>Komplett elmontage för maskiner, produktionslinjer och industriella system. Vi följer ritning och skapar en färdig installation.</p>
                 </div>
                 <div class="service-card reveal">
                     <div class="service-icon">⚙️</div>
                     <h3>Automationslösningar</h3>
-                    <p>Moderna automationslösningar som effektiviserar produktion och ökar driftsäkerhet. PLC-programmering och styrsystem.</p>
+                    <p>Vi erbjuder kompletta automationslösningar, från skåpsbyggnation till driftsättning av installationer.</p>
                 </div>
                 <div class="service-card reveal">
                     <div class="service-icon">🛠️</div>
                     <h3>Servicearbeten</h3>
-                    <p>Felsökning, underhåll och akuta insatser. Vi minimerar stillestånd så att ni kan fokusera på er kärnverksamhet.</p>
+                    <p>Underhåll och felsökning av maskiner, industriellt montage och hydrualik.</p>
                 </div>
             </div>
         </div>
@@ -647,9 +966,12 @@
             <div class="about-grid">
                 <div class="about-text">
                     <span class="section-label reveal">Om OCS EL</span>
-                    <h2 class="section-title reveal">Flexibel elkompetens — utan omvägar</h2>
-                    <p class="reveal">OCS EL AB är ett svenskt bolag som levererar eltjänster till industrier med höga krav. Vi fungerar som en förlängning av ert team — ni ringer, vi kommer.</p>
-                    <p class="reveal">Våra uppdragsgivare finns inom marin, försvar och tung industri. Vi är vana vid krävande miljöer där det inte finns utrymme för kompromisser på kvalitet eller säkerhet.</p>
+                    <h2 class="section-title reveal">Flexibel elkompetens — snyggt byggt!</h2>
+                    <p class="reveal">OCS EL AB levererar eltjänster till industrier där kvalitet och säkerhet inte är förhandlingsbart. Våra uppdragsgivare finns inom marin, försvar och tung industri.</p>
+                    <p class="reveal"> Bakom leveransen står Oskar, med erfarenhet av automation och montage. Han har ett genuint öga för installationer som inte bara fungerar utan också håller hög standard.</p>
+                </div>
+                <div class="reveal" style="margin-bottom: 1.5rem;">
+                    <img src="images/Oskar.jpeg" alt="Bild" style="width: 70%; border-radius: 10px; object-fit: cover;">
                 </div>
                 <div class="about-stats reveal">
                     <div class="stat-box">
@@ -657,18 +979,93 @@
                         <div class="label">Fokus</div>
                     </div>
                     <div class="stat-box">
-                        <div class="number">100%</div>
-                        <div class="label">Kundnöjdhet</div>
+                        <div class="number">2025</div>
+                        <div class="label">Grundat</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="number">📍</div>
+                        <div class="label">Västra Götaland & Halland</div>
                     </div>
                     <div class="stat-box">
                         <div class="number">⚡</div>
-                        <div class="label">Snabb leverans</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="number">SE</div>
-                        <div class="label">Svenskt bolag</div>
+                        <div class="label">Automationselektriker</div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="certifications" id="certifikat">
+        <div class="section-inner">
+            <span class="section-label reveal">Certifieringar</span>
+            <h2 class="section-title reveal">Behörig för krävande miljöer</h2>
+            <p class="section-subtitle reveal">Vi håller certifieringar som krävs för arbete inom marin verksamhet, försvar och explosionsklassade zoner.</p>
+
+            <div class="cert-grid">
+
+                <!-- ATEX & EX -->
+                <div class="cert-card reveal">
+                    <div class="cert-icon">
+                        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="28,4 50,16 50,40 28,52 6,40 6,16" stroke="#4aa3df" stroke-width="2" fill="rgba(74,163,223,0.1)"/>
+                            <text x="28" y="32" text-anchor="middle" fill="#4aa3df" font-family="Outfit, sans-serif" font-size="14" font-weight="700">EX</text>
+                        </svg>
+                    </div>
+                    <h3>ATEX & EX-Klassning</h3>
+                    <p>Certifierad för arbete i explosionsklassade zoner och explosiva atmosfärer</p>
+                </div>
+
+                <!-- ECY -->
+                <div class="cert-card reveal">
+                    <div class="cert-icon">
+                        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="28" cy="28" r="20" stroke="#4aa3df" stroke-width="2" fill="rgba(74,163,223,0.1)"/>
+                            <path d="M30 12 L22 30 L28 30 L26 44 L36 24 L30 24 Z" fill="#4aa3df" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <h3>ECY Kompetensbevis</h3>
+                    <p>Elbranschens centrala yrkesnämnd - verifierad elkompetens</p>
+                </div>
+
+                <!-- Hydraulik -->
+                <div class="cert-card reveal">
+                    <div class="cert-icon">
+                        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="12" y="20" width="32" height="16" rx="3" stroke="#4aa3df" stroke-width="2" fill="rgba(74,163,223,0.1)"/>
+                            <line x1="28" y1="20" x2="28" y2="36" stroke="#4aa3df" stroke-width="2" stroke-dasharray="3 2"/>
+                            <rect x="22" y="14" width="12" height="6" rx="2" stroke="#4aa3df" stroke-width="1.5" fill="rgba(74,163,223,0.15)"/>
+                            <rect x="22" y="36" width="12" height="6" rx="2" stroke="#4aa3df" stroke-width="1.5" fill="rgba(74,163,223,0.15)"/>
+                            <circle cx="16" cy="28" r="2" fill="#4aa3df" opacity="0.6"/>
+                            <circle cx="40" cy="28" r="2" fill="#4aa3df" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <h3>Hydraulik</h3>
+                    <p>Grundkurs i hydrauliska system - felsökning och underhåll</p>
+                </div>
+                <!-- Elsäkerhet -->
+                <div class="cert-card reveal">
+                    <div class="cert-icon">
+                        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M28 6 L46 14 L46 30 C46 40 38 48 28 52 C18 48 10 40 10 30 L10 14 Z" stroke="#4aa3df" stroke-width="2" fill="rgba(74,163,223,0.1)" stroke-linejoin="round"/>
+                            <path d="M30 18 L24 30 L28 30 L26 38 L34 26 L30 26 Z" fill="#4aa3df" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <h3>Elsäkerhet</h3>
+                    <p>Elsäkerhet - säkra arbetsmetoder vid elektriska installationer</p>
+                </div>
+                <!-- Heta Arbeten -->
+                <div class="cert-card reveal">
+                    <div class="cert-icon">
+                        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M28 8 C28 8 38 20 38 32 C38 38 34 44 28 44 C22 44 18 38 18 32 C18 20 28 8 28 8Z" stroke="#4aa3df" stroke-width="2" fill="rgba(74,163,223,0.1)" stroke-linejoin="round"/>
+                            <path d="M28 24 C28 24 33 30 33 35 C33 38 31 40 28 40 C25 40 23 38 23 35 C23 30 28 24 28 24Z" stroke="#4aa3df" stroke-width="1.5" fill="rgba(74,163,223,0.15)" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Heta Arbeten</h3>
+                    <p>Certifierad för svetsning, skärning och lödning i brandfarliga miljöer</p>
+                </div>
+
             </div>
         </div>
     </section>
@@ -678,21 +1075,21 @@
         <div class="section-inner">
             <span class="section-label reveal">Kontakt</span>
             <h2 class="section-title reveal">Hör av dig</h2>
-            <p class="section-subtitle reveal">Beskriv vad ni behöver hjälp med så återkommer vi — snabbt och utan krångel.</p>
+            <p class="section-subtitle reveal">Fyll i formuläret med era kontaktuppgifter och beskriv gärna kort varför ni kontaktar oss - så återkopplar vi snarast!</p>
             <div class="contact-grid">
                 <div class="contact-info reveal">
                     <div class="contact-item">
                         <div class="contact-item-icon">✉</div>
                         <div class="contact-item-text">
                             <h4>E-post</h4>
-                            <p>info@ocsel.se</p>
+                            <p>Oskar@ocsel.se</p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-item-icon">☎</div>
                         <div class="contact-item-text">
                             <h4>Telefon</h4>
-                            <p>+46 XX-XXX XX XX</p>
+                            <p>TBD</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -700,6 +1097,20 @@
                         <div class="contact-item-text">
                             <h4>Plats</h4>
                             <p>Göteborg, Sverige</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">☕</div>
+                        <div class="contact-item-text">
+                            <h4>Nätverk</h4>
+                            <p>Vi träffas gärna över en lunch eller en kopp kaffe.</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">🤝</div>
+                        <div class="contact-item-text">
+                            <h4>Affärssamarbeten</h4>
+                            <p>Behöver ni förstärkning eller vill diskutera ett samarbete? Hör av er så pratar vi igenom hur vi kan hjälpa till.</p>
                         </div>
                     </div>
                 </div>
@@ -711,6 +1122,10 @@
                     <input type="text" name="company" placeholder="Företag">
                     <input type="text" name="subject" placeholder="Ämne">
                     <textarea name="message" placeholder="Meddelande" required></textarea>
+                    <label class="form-consent">
+                        <input type="checkbox" name="consent" required>
+                        <span>Jag godkänner att OCS EL AB lagrar mina uppgifter för att hantera min förfrågan. Läs vår <a href="integritetspolicy.html">integritetspolicy</a>.</span>
+                    </label>
                     <button type="submit" class="btn-submit">Skicka meddelande</button>
                 </form>
             </div>
@@ -719,8 +1134,19 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 OCS EL AB. Alla rättigheter förbehållna.</p>
+        <p>&copy; 2026 OCS EL AB. Alla rättigheter förbehållna. | <a href="integritetspolicy.html">Integritetspolicy</a></p>
     </footer>
+
+    <!-- COOKIE BANNER -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-inner">
+            <p>Vi använder cookies för att analysera trafiken på vår webbplats via Google Analytics. Ingen personlig data säljs vidare. Läs mer i vår <a href="integritetspolicy.html">integritetspolicy</a>.</p>
+            <div class="cookie-buttons">
+                <button class="cookie-btn cookie-decline" onclick="declineCookies()">Avböj</button>
+                <button class="cookie-btn cookie-accept" onclick="acceptCookies()">Godkänn</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Nav scroll effect
@@ -736,8 +1162,45 @@
                 }
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Cookie consent
+        function acceptCookies() {
+            localStorage.setItem('cookie-consent', 'accepted');
+            document.getElementById('cookieBanner').classList.remove('show');
+            loadAnalytics();
+        }
+
+        function declineCookies() {
+            localStorage.setItem('cookie-consent', 'declined');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+
+        function loadAnalytics() {
+            if (document.getElementById('ga-script')) return;
+            var s = document.createElement('script');
+            s.id = 'ga-script';
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-7EKC4EQ06B';
+            document.head.appendChild(s);
+            s.onload = function() {
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', 'G-7EKC4EQ06B');
+            };
+        }
+
+        // Check consent on page load
+        (function() {
+            var consent = localStorage.getItem('cookie-consent');
+            if (consent === 'accepted') {
+                loadAnalytics();
+            } else if (!consent) {
+                document.getElementById('cookieBanner').classList.add('show');
+            }
+        })();
     </script>
 
 </body>
