@@ -827,10 +827,26 @@
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
+            .nav-inner {
+                height: 70px;
+            }
+
+            nav.scrolled .nav-inner {
+                height: 52px;
+            }
+
+            .nav-logo {
+                height: 50px;
+            }
+
+            nav.scrolled .nav-logo {
+                height: 38px;
+            }
+
             .nav-links {
                 display: none;
                 position: absolute;
-                top: 72px;
+                top: 70px;
                 left: 0;
                 right: 0;
                 background: var(--white);
@@ -847,23 +863,66 @@
             .mobile-toggle {
                 display: block;
             }
+
             .nav-tagline {
-            display: none;
+                display: none;
             }
 
             .hero {
-                padding: 7rem 2rem 6rem;
+                padding: 6rem 1.5rem 3rem;
             }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
             .hero-instagram {
-             display: none;
+                display: none;
             }
+
             .about-grid {
                 grid-template-columns: 1fr;
-                gap: 2.5rem;
+                gap: 2rem;
+            }
+
+            .about-grid > .reveal img {
+                width: 100% !important;
+                max-width: 280px;
+                margin: 0 auto;
+                display: block;
             }
 
             .about-stats {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .stat-box {
+                padding: 1.2rem 0.8rem;
+            }
+
+            .stat-box .number {
+                font-size: 1.5rem;
+            }
+
+            .stat-box .label {
+                font-size: 0.72rem;
+            }
+
+            .section-label {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
             }
 
             .contact-grid {
@@ -883,12 +942,12 @@
                 flex-direction: column;
                 text-align: center;
             }
+
             .cookie-buttons {
                 width: 100%;
                 justify-content: center;
             }
         }
-
         @media (max-width: 480px) {
             .cert-grid {
                 grid-template-columns: 1fr;
@@ -1089,7 +1148,7 @@
                         <div class="contact-item-icon">☎</div>
                         <div class="contact-item-text">
                             <h4>Telefon</h4>
-                            <p>Skriv ert telefonnummer i kontaktformuläret så ringer vi upp</p>
+                            <p>Skriv ert telefonnummer i kontaktformuläret så ringer vi upp.</p>
                         </div>
                     </div>
                     <div class="contact-item">
